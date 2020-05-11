@@ -1,11 +1,10 @@
 
 exports.up = async function(knex) {
-    await knex.schema.createTable('user-directory', (table) => {
+    await knex.schema.createTable('user_directory', (table) => {
         table.increments('id')
         table.string('username').notNullable().unique()
         table.string('password').notNullable()
-        table.departments('departments').notNullable()
-
+        table.string('departments').notNullable()
     })
   
 };
