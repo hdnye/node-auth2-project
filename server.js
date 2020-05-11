@@ -3,9 +3,9 @@ const db = require('./data/config');
 const cors = require('cors')
 const helmet = require('helmet')
 const session = require('express-session')
-const KnexSessionStore = require('connect-session-knex');
-const usersRouter = require('./data/users/usersRouter');
-const authRouter = require('./data/auth/authRouter')
+const KnexSessionStore = require('connect-session-knex')(session);
+//const usersRouter = require('./data/users/usersRouter');
+//const authRouter = require('./data/auth/authRouter')
 
 const server = express()
 
@@ -17,7 +17,7 @@ server.use(session({
     name: 'token',
     resave: false,
     saveUninitialized: false,
-    secret: process.env.COOKIE_SECRET,
+    secret: process.env.COOKIE_SECRET || secret,
     cookie: {
         httpOnly: true
     },
@@ -26,7 +26,10 @@ server.use(session({
         createTable: true,
     }),
 }))
+
 //routers
+//server.use('/users', usersRouter);
+//server.use('/auth', authRouter);
 
 //welcome message
 server.get('/', (req, res, next) => {
