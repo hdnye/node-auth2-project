@@ -15,7 +15,7 @@ function find() {
 
 function findBy(filter) {
     return db('user_directory')
-        .selelct('id', 'username', 'password')
+        .select('id', 'username', 'password')
         .where(filter)
 };
 
@@ -27,7 +27,7 @@ function findById(id) {
 }
 
 async function add(user) {
-    user.password = await brcypt.hash(user.password, 13)
+    user.password = await brcypt.hash('user.password', 13)
     const [id] = await db('user_directory').insert(user)
     return findById(id)
         

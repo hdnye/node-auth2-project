@@ -6,7 +6,7 @@ const helmet = require('helmet')
 //const KnexSessionStore = require('connect-session-knex')(session);
 const cookieParser = require('cookie-parser');
 const usersRouter = require('./users/usersRouter');
-//const authRouter = require('./data/auth/authRouter')
+const authRouter = require('./auth/authRouter')
 
 const server = express()
 
@@ -31,7 +31,7 @@ server.use(cookieParser())
 
 //routers
 server.use('/users', usersRouter);
-//server.use('/auth', authRouter);
+server.use('/auth', authRouter);
 
 //welcome message
 server.get('/', (req, res, next) => {
