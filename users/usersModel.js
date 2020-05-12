@@ -5,6 +5,7 @@ module.exports = {
     find,
     findBy,
     findById,
+    findByDept,
     add
 }
 
@@ -26,9 +27,15 @@ function findById(id) {
         .first()
 }
 
+function findByDept(department) {
+    return db('user_directory')
+        .select('id', 'username', 'department')
+        .where({ department })
+        .first()
+}
+
 async function add(user) {
     user.password = await brcypt.hash('user.password', 13)
     const [id] = await db('user_directory').insert(user)
-    return findById(id)
-        
+    return findById(id)        
 }

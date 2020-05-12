@@ -12,5 +12,12 @@ router.get('/', validate(), async (req, res, next) => {
      }
 });
 
+router.get('/', validate(), async (req, res, next) => {
+    try {
+        res.json(await User.findByDept())
+    } catch(err) {
+        next(err)
+    }
+})
 
 module.exports = router;

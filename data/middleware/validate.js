@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-function validate(role = 'normal') {
+function validate() {
     return async (req, res, next) => {
         const authErr = {
             message: 'Invalid Credentials'
