@@ -14,7 +14,7 @@ function validate(role = 'normal') {
             if(err || decodedPayload.userRole !== role) {
                 return res.status(401).json(authErr)
             }
-            res.token = decodedPayload
+            req.token = decodedPayload
             next()
         })
 

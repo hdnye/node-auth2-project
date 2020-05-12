@@ -1,7 +1,8 @@
-const User = require('./usersModel')
-const validate = require('../data/middleware')
+const express = require('express');
+const User = require('./usersModel');
+const validate = require('../data/middleware/validate');
 
-const router = Router();
+const router = express.Router();
 
 router.get('/', validate(), async (req, res, next) => {
     try {
@@ -9,7 +10,7 @@ router.get('/', validate(), async (req, res, next) => {
      } catch(err) {
          next(err)
      }
-})
+});
 
 
 module.exports = router;
