@@ -1,5 +1,5 @@
 const db = require('../data/config')
-const brcypt = require('bcryptjs')
+const bcrypt = require('bcryptjs')
 
 module.exports = {
     find,
@@ -35,7 +35,7 @@ function findByDept(department) {
 }
 
 async function add(user) {
-    user.password = await brcypt.hash('user.password', 13)
+    user.password = await bcrypt.hash(user.password, 13)
     const [id] = await db('user_directory').insert(user)
     return findById(id)        
 }

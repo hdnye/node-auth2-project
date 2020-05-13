@@ -27,17 +27,24 @@ router.post('/login', async (req, res, next) => {
         message: 'Invalid Credentials'
       } 
    try {
-       const { username, password } = req.body
+      
+       const { username, password } = req.body 
        const user = await User.findBy({ username }).first()
+       console.log(user)
+
+
          if(!user) {
              console.log('checkpoint 1')
              return res.status(401).json(authErr)
          }
-        const pswdValid = await bcrypt.compare(password, user.password)
-          if(!pswdValid) {
-              console.log('checkpoint 2')
-              return res.status(401).json(authErr)
-         }
+        const pswdValid = bcrypt.compareSync(password, user.password)
+    //       if(!pswdValid) {
+    //           console.log('checkpoint 2')
+    //           return res.status(401).json({
+    //               message: 'Invalid Password'
+    //           })
+    //      }
+    
          const tokenPayload = {
              subject: user.id,
              username: user.username
